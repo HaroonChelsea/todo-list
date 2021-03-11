@@ -9,8 +9,18 @@ import Todo from "./components/Todo";
 
 function App() {
   const todos = useSelector((state) => state.todos);
+  const theme = useSelector((state) => state.theme);
+  React.useEffect(() => {
+    const root = window.document.documentElement;
+    if (theme === "dark") {
+      root.setAttribute("class", theme);
+      document.body.setAttribute("class", " dark:bg-gray-700 h-full");
+    } else {
+      root.setAttribute("class", theme);
+    }
+  }, [theme]);
   return (
-    <React.Fragment>
+    <div className="">
       <Router>
         <Nav />
         <AddTodo />
@@ -19,16 +29,16 @@ function App() {
           <div
             className={
               todos.length > 0
-                ? "bg-white shadow overflow-hidden sm:rounded-md"
-                : "bg-white overflow-hidden sm:rounded-md"
+                ? "bg-white dark:bg-gray-900 dark:text-white shadow overflow-hidden sm:rounded-md"
+                : "bg-white dark:bg-gray-700 overflow-hidden sm:rounded-md"
             }
           >
             <ul className="divide-y divide-gray-200">
               {todos.length > 0 ? (
-                todos.map((todo) => <Todo todo={todo} />)
+                todos.map((todo) => <Todo key={todo.id} todo={todo} />)
               ) : (
                 <li>
-                  <div className="bg-red-400 text-center w-1/3 mx-auto rounded p-4 text-lg font-bold text-white">
+                  <div className="bg-red-500 text-center w-1/3 mx-auto rounded p-4 text-lg font-bold text-white">
                     Please add todo!
                   </div>
                 </li>
@@ -51,7 +61,7 @@ function App() {
           />
         </Switch>
       </Router>
-    </React.Fragment>
+    </div>
   );
 }
 

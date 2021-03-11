@@ -3,21 +3,21 @@ import getDate from "../utils/getDate";
 const initState = [
   {
     id: uuid(),
-    todo: "Do shopping Do shopping Do shopping Do shopping",
+    todo: "Do shopping",
     description: "",
     completed: false,
     date: "January 7, 2020",
   },
   {
     id: uuid(),
-    todo: "make programs",
+    todo: "Make programs",
     description: "",
     completed: false,
     date: "January 7, 2020",
   },
   {
     id: uuid(),
-    todo: "wash car",
+    todo: "Wash car",
     description: "",
     completed: false,
     date: "January 7, 2020",
@@ -73,7 +73,6 @@ const todosReducer = (state = initState, action) => {
       state = [];
       return [...state];
     default:
-      console.log("Default");
       return [...state];
   }
 };

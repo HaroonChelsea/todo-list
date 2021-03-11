@@ -5,7 +5,7 @@ import { completeTodo } from "../actions";
 export default function Todo({ todo }) {
   const dispatch = useDispatch();
   return (
-    <li className="hover:bg-gray-50" key={todo.id}>
+    <li className="hover:bg-gray-50 dark:hover:bg-gray-600">
       <div className="px-4 py-4 flex items-center sm:px-6">
         <div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
           <div>
