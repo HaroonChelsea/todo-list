@@ -4,6 +4,7 @@ const UPDATE_TODO = "UPDATE_TODO";
 const COMPLETE_TODO = "COMPLETE_TODO";
 const CLEAR_TODO = "CLEAR_TODO";
 const CHANGE_THEME = "CHANGE_THEME";
+const DISPLAY_COMPLETED = "DISPLAY_COMPLETED";
 
 export const addTodo = (payload) => ({
   type: ADD_TODO,
@@ -26,4 +27,7 @@ export const clearTodo = () => ({
 });
 export const changeTheme = () => ({
   type: CHANGE_THEME,
+});
+export const displayCompleted = () => ({
+  type: DISPLAY_COMPLETED,
 });

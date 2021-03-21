@@ -10,7 +10,10 @@ export default function Todo({ todo }) {
         <div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
           <div>
             <div className="flex">
-              <Link className="text-xl font-bold" to={`/${todo.id}`}>
+              <Link
+                className="text-xl font-bold hover:text-gray-600 dark:hover:text-gray-800"
+                to={`/${todo.id}`}
+              >
                 {todo.todo}
               </Link>
               {todo.completed && (

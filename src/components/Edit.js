@@ -36,7 +36,7 @@ export default function Edit({ todo }) {
                 description: updateDescription,
               })
             );
-            history.push("/");
+            history.push(`/${todo.id}`);
           }}
           className=" bg-green-400 hover:bg-green-500 text-white font-bold p-2 rounded focus:ring-green-400 focus:outline-none mx-1 "
         >
