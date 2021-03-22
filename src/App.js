@@ -1,16 +1,18 @@
 import React from "react";
-// import Nav from "./components/Nav";
 import AddTodo from "./components/AddTodo";
 import { useSelector, useDispatch } from "react-redux";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import DisPlayModal from "./components/Modal";
-import ClearTodos from "./components/ClearTodos";
+import Actions from "./components/Actions";
 import Todo from "./components/Todo";
 import { changeTheme } from "./actions";
 
 function App() {
   const todos = useSelector((state) => state.todos);
+
   const theme = useSelector((state) => state.theme);
+  const [status, setStatus] = React.useState("null");
+  const [filteredTodos, setFilteredTodos] = React.useState([]);
   const dispatch = useDispatch();
   React.useEffect(() => {
     const root = window.document.documentElement;
@@ -21,10 +23,27 @@ function App() {
       root.setAttribute("class", theme);
     }
   }, [theme]);
+  const filter = () => {
+    switch (status) {
+      case "Completed":
+        setFilteredTodos(todos.filter((todo) => todo.completed === true));
+        break;
+      case "notCompleted":
+        setFilteredTodos(todos.filter((todo) => todo.completed === false));
+        break;
+      default:
+        setFilteredTodos(todos);
+        break;
+    }
+  };
+  React.useEffect(() => {
+    filter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status, todos]);
   return (
     <div className="max-w-xl mx-auto">
       <div className="flex justify-between sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white lg:text-6xl">
+        <h2 className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500 text-4xl font-extrabold lg:text-6xl">
           TODO List
         </h2>
         <div className="text-gray-400 mt-3 lg:mt-6">
@@ -74,18 +93,32 @@ function App() {
       <div className="mt-2">
         <Router>
           <AddTodo />
-          {todos.length > 0 ? <ClearTodos /> : ""}
+          <div className="max-w-5xl mx-auto sm:px-6  lg:px-8 my-3 bg-white dark:bg-gray-700 flex justify-between">
+            {filteredTodos.length > 0 ? <Actions setStatus={setStatus} /> : ""}
+            <select
+              defaultValue="All"
+              onChange={(e) => setStatus(e.target.value)}
+              className="flex-1 pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md dark:bg-gray-600 dark:border-black dark:text-white"
+            >
+              <option value="All">All</option>
+              <option value="Completed">Completed</option>
+              <option value="notCompleted">Not Completed</option>
+            </select>
+          </div>
+
           <div className="max-w-5xl mx-auto sm:px-6 lg:px-8 mt-5">
             <div
               className={
-                todos.length > 0
+                filteredTodos.length > 0
                   ? "bg-white dark:bg-gray-900 dark:text-white shadow overflow-hidden sm:rounded-md"
                   : "bg-white dark:bg-gray-700 overflow-hidden sm:rounded-md"
               }
             >
               <ul className="divide-y divide-gray-200">
-                {todos.length > 0 ? (
-                  todos.map((todo) => <Todo key={todo.id} todo={todo} />)
+                {filteredTodos.length > 0 ? (
+                  filteredTodos.map((todo) => (
+                    <Todo key={todo.id} todo={todo} />
+                  ))
                 ) : (
                   <li>
                     <div className="rounded-md bg-yellow-100 p-4">
@@ -125,13 +158,15 @@ function App() {
             <Route
               path={"/editing/:todoId"}
               children={({ match }) => {
-                return <DisPlayModal match checkRoute={"editTodo"} />;
+                return <DisPlayModal match={match} checkRoute={"editTodo"} />;
               }}
             />
             <Route
               path={"/:todoId"}
               children={({ match }) => {
-                return <DisPlayModal match checkRoute={"displayTodo"} />;
+                return (
+                  <DisPlayModal match={match} checkRoute={"displayTodo"} />
+                );
               }}
             />
           </Switch>
