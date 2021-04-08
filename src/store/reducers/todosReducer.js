@@ -1,5 +1,5 @@
-import { uuid } from "../utils/uuid";
-import getDate from "../utils/getDate";
+import { uuid } from "../../utils/uuid";
+import getDate from "../../utils/getDate";
 let initState;
 if (JSON.parse(localStorage.getItem("todos"))) {
   initState = JSON.parse(localStorage.getItem("todos"));

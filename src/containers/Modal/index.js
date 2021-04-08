@@ -1,9 +1,9 @@
 import Modal from "react-modal";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Display from "./Display";
-import Edit from "./Edit";
-import { deleteTodo } from "../actions";
+import Display from "../../components/Display";
+import Edit from "../Edit";
+import { deleteTodo } from "../../store/actions/todo-action";
 
 function DisPlayModal({ checkRoute, match }) {
   const { todoId } = useParams();

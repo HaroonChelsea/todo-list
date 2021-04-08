@@ -1,5 +1,5 @@
 import React from "react";
-import { updateTodo } from "../actions";
+import { updateTodo } from "../../store/actions/todo-action";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 

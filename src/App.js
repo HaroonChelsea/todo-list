@@ -1,11 +1,11 @@
 import React from "react";
-import AddTodo from "./components/AddTodo";
 import { useSelector, useDispatch } from "react-redux";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-import DisPlayModal from "./components/Modal";
-import Actions from "./components/Actions";
-import Todo from "./components/Todo";
-import { changeTheme } from "./actions";
+import AddTodo from "./containers/AddTodo";
+import DisPlayModal from "./containers/Modal";
+import Actions from "./containers/Actions";
+import Todo from "./containers/Todo";
+import { changeTheme } from "./store/actions/theme-action";
 
 function App() {
   const todos = useSelector((state) => state.todos);

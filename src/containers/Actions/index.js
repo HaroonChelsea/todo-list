@@ -1,5 +1,4 @@
-import React from "react";
-import { clearTodo } from "../actions";
+import { clearTodo } from "../../store/actions/todo-action";
 import { useDispatch } from "react-redux";
 
 export default function SelectTodos() {

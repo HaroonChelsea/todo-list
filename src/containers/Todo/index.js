@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { completeTodo } from "../actions";
+import { completeTodo } from "../../store/actions/todo-action";
 export default function Todo({ todo }) {
   const dispatch = useDispatch();
   return (
