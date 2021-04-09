@@ -1,11 +1,9 @@
 import { combineReducers } from "redux";
 
-import todosReducer from "./todosReducer";
-import themeReducer from "./themeReducer";
+import todos from "./todosReducer";
+import theme from "./themeReducer";
 
-const rootReducer = combineReducers({
-  todos: todosReducer,
-  theme: themeReducer,
+export default combineReducers({
+  todos,
+  theme
 });
-
-export default rootReducer;
